@@ -1,3 +1,11 @@
+*.avi
+*.mp4
+*.jpg
+*.jpeg
+.yolo_files/*
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
