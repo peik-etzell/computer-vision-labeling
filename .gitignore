@@ -1,4 +1,10 @@
-
+*.avi
+*.mp4
+*.jpg
+*.jpeg
+.yolo_files/coco.names
+.yolo_files/yolov3.cfg
+.yolo_files/yolov3.weights
 
 
 # Byte-compiled / optimized / DLL files
