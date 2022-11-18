@@ -3,9 +3,9 @@
 ```pip install opencv-python numpy ```
 
 Go and download the following files from the internet:
-1. `yolov3.weights`   (> 200 MB)
-1. `yolov3.cfg`
-1. `coco.names`
+1. [`yolov3.weights`](https://pjreddie.com/media/files/yolov3.weights)   (> 200 MB)
+1. [`yolov3.cfg`](https://opencv-tutorial.readthedocs.io/en/latest/_downloads/10e685aad953495a95c17bfecd1649e5/yolov3.cfg)
+1. [`coco.names`](https://opencv-tutorial.readthedocs.io/en/latest/_downloads/a9fb13cbea0745f3d11da9017d1b8467/coco.names)
 
 And put them in the folder called `./.yolo_files/` with the same names as above.
 
