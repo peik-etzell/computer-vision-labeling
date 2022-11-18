@@ -24,3 +24,7 @@ Put images in a folder called ./images/ and run:
 Put .mp4 videos in a folder called ./videos/ and run:
 
 `python video_yolo.py`
+
+#### Output:
+
+Labeled videos/images will be put beside the originals in `./images/` and `./videos/`
