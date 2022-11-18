@@ -22,15 +22,13 @@ net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 
 # determine the output layer
 ln = net.getLayerNames()
+# ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 # fix from: https://stackoverflow.com/questions/69834335/loading-yolo-invalid-index-to-scalar-variable
 ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
 
 
-def load_image(dir: str, file: str):
+def load_image(path):
     global img, img0, outputs, ln
-
-    path = f'{dir}/{file}'
-    output = f'{dir}/labeled_{file}'
 
     img0 = cv2.imread(path)
     img = img0.copy()
@@ -50,10 +48,9 @@ def load_image(dir: str, file: str):
     outputs = np.vstack(outputs)
 
     post_process(img, outputs, 0.5)
-    cv2.imwrite(output, img)
-    # cv2.imshow('window',  img)
-    # cv2.displayOverlay('window', f'forward propagation time={t:.3}')
-    # cv2.waitKey(0)
+    cv2.imshow('window',  img)
+    cv2.displayOverlay('window', f'forward propagation time={t:.3}')
+    cv2.waitKey(0)
 
 
 def post_process(img, outputs, conf):
@@ -95,10 +92,23 @@ def post_process(img, outputs, conf):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
 
 
+def trackbar(x):
+    global img
+    conf = x/100
+    img = img0.copy()
+    post_process(img, outputs, conf)
+    cv2.displayOverlay('window', f'confidence level={conf}')
+    cv2.imshow('window', img)
+
+
+cv2.namedWindow('window')
+cv2.createTrackbar('confidence', 'window', 50, 100, trackbar)
+
 dir = './images'
 for file in os.listdir(dir):
-    if not 'labeled' in file and not file.startswith('.'):
-        print(file)
-        load_image(dir, file)
+    print(file)
+    load_image(f'{dir}/{file}')
 if len(os.listdir(dir)) == 0:
     print('Put your images in "./images/"')
+
+cv2.destroyAllWindows()
